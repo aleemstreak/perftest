@@ -19,10 +19,12 @@ public class PerftestServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)	throws IOException {
 		resp.setContentType("text/plain");
 
-		runBenchmark(new StringBenchmark(), resp);
+		runBenchmark(new StringBenchmark("Some random string here."), resp);
+		runBenchmark(new StringBenchmark("Some really long piece of text here. This sentence will go on and on forever.... there is still more text to type. Maybe I should have just looked up some lorem ipsum text ro something."), resp);
 		runBenchmark(new MapBenchmark(), resp);
 		runBenchmark(new EntityBenchmark(), resp);
 		runBenchmark(new EntityPreSerializedBenchmark(), resp);
+		
 	}
 	
 	private void runBenchmark(MemcacheBenchmark benchmark, HttpServletResponse resp) throws IOException {
