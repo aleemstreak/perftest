@@ -1,11 +1,11 @@
-package com.rewardly.perftest.benchmarks;
+package com.rewardly.perftest.memcache.benchmarks;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.google.appengine.api.datastore.Entity;
-import com.rewardly.perftest.MemcacheBenchmark;
 import com.rewardly.perftest.Utils;
+import com.rewardly.perftest.memcache.MemcacheBenchmark;
 
 public class EntityPreSerializedBenchmark extends MemcacheBenchmark {
 

@@ -1,4 +1,4 @@
-package com.rewardly.perftest;
+package com.rewardly.perftest.memcache;
 
 import java.io.IOException;
 import java.util.Map;
@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
-import com.rewardly.perftest.benchmarks.EntityBenchmark;
-import com.rewardly.perftest.benchmarks.EntityPreSerializedBenchmark;
-import com.rewardly.perftest.benchmarks.MapBenchmark;
-import com.rewardly.perftest.benchmarks.StringBenchmark;
+import com.rewardly.perftest.Utils;
+import com.rewardly.perftest.memcache.benchmarks.EntityBenchmark;
+import com.rewardly.perftest.memcache.benchmarks.EntityPreSerializedBenchmark;
+import com.rewardly.perftest.memcache.benchmarks.MapBenchmark;
+import com.rewardly.perftest.memcache.benchmarks.StringBenchmark;
 
 @SuppressWarnings("serial")
 public class PerftestServlet extends HttpServlet {

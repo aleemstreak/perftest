@@ -1,4 +1,4 @@
-package com.rewardly.perftest;
+package com.rewardly.perftest.memcache;
 
 import java.util.Map;
 
