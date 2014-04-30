@@ -47,6 +47,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>EntityTest</servlet-name>
+		<servlet-class>com.rewardly.perftest.entities.EntityTestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EntityTest</servlet-name>
+		<url-pattern>/entitytest</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>ReflectionTest</servlet-name>
 		<servlet-class>com.rewardly.perftest.reflection.ReflectionTestServlet</servlet-class>
 	</servlet>
