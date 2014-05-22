@@ -34,10 +34,10 @@ public class EntityTestServlet extends HttpServlet {
 		
 		benchmark.storeTestData(testData);
 		benchmark.warmup();
+		benchmark.setup(keys);
 		
 		long runTime = System.nanoTime();
 		for (int i = 0; i < 20; i++) {
-			benchmark.setup(keys);
 			benchmark.runOnce(keys);
 		}
 		runTime = (System.nanoTime() - runTime);
