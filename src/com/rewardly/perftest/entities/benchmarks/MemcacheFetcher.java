@@ -14,6 +14,9 @@ import com.rewardly.perftest.entities.EntityBenchmark;
 
 public class MemcacheFetcher extends EntityBenchmark {
 
+	private List<String> currentMemcacheKeys = null;
+	private MemcacheService ms = null;
+	
 	@Override
 	public void storeTestData(List<Entity> entities) {
 		MemcacheService ms = MemcacheServiceFactory.getMemcacheService();
@@ -30,13 +33,17 @@ public class MemcacheFetcher extends EntityBenchmark {
 	}
 
 	@Override
-	public void runOnce(List<Key> keys) {
-		List<String> memcacheKeys = new ArrayList<>();
+	public void runOnce(List<Key> keys) {	
+		ms.getAll(this.currentMemcacheKeys);
+	}
+	
+	@Override
+	public void setup(List<Key> keys) {
+		this.ms = MemcacheServiceFactory.getMemcacheService();
+		this.currentMemcacheKeys = new ArrayList<>();
 		for (Key k : keys) {
-			memcacheKeys.add(KeyFactory.keyToString(k));
+			this.currentMemcacheKeys.add(KeyFactory.keyToString(k));
 		}
-		MemcacheService ms = MemcacheServiceFactory.getMemcacheService();
-		ms.getAll(memcacheKeys);
 	}
 
 }

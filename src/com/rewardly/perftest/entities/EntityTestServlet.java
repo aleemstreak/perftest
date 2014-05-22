@@ -37,8 +37,8 @@ public class EntityTestServlet extends HttpServlet {
 		
 		long runTime = System.nanoTime();
 		for (int i = 0; i < 20; i++) {
+			benchmark.setup(keys);
 			benchmark.runOnce(keys);
-			
 		}
 		runTime = (System.nanoTime() - runTime);
 		double averageRunTimeMs = runTime/(1e6 * 20);

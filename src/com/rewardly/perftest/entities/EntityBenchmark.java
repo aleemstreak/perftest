@@ -13,4 +13,7 @@ public abstract class EntityBenchmark {
 	public String getBenchmarkName() {
 		return this.getClass().getSimpleName();
 	}
+	public void setup(List<Key> keys) {
+		// do nothing by default
+	}
 }
