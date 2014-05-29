@@ -12,6 +12,7 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.rewardly.perftest.Utils;
 import com.rewardly.perftest.memcache.benchmarks.EntityBenchmark;
 import com.rewardly.perftest.memcache.benchmarks.EntityPreSerializedBenchmark;
+import com.rewardly.perftest.memcache.benchmarks.GeoPtListBenchmark;
 import com.rewardly.perftest.memcache.benchmarks.MapBenchmark;
 import com.rewardly.perftest.memcache.benchmarks.StringBenchmark;
 
@@ -23,6 +24,7 @@ public class PerftestServlet extends HttpServlet {
 		runBenchmark(new StringBenchmark("Some random string here."), resp);
 		runBenchmark(new StringBenchmark("Some really long piece of text here. This sentence will go on and on forever.... there is still more text to type. Maybe I should have just looked up some lorem ipsum text ro something."), resp);
 		runBenchmark(new MapBenchmark(), resp);
+		runBenchmark(new GeoPtListBenchmark(), resp);
 		runBenchmark(new EntityBenchmark(), resp);
 		runBenchmark(new EntityPreSerializedBenchmark(), resp);
 		
