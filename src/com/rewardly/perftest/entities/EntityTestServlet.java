@@ -63,7 +63,7 @@ public class EntityTestServlet extends HttpServlet {
 	private List<Entity> generateTestData() {
 		List<Entity> entities = new ArrayList<>();
 		for (int i = 1; i <= 1000; i++) {
-			Key k = KeyFactory.createKey(generateRandomString(40), i);
+			Key k = KeyFactory.createKey("testentity", i);
 			Entity e = new Entity(k);
 			for (int j = 0; j < 100; j++) {
 				e.setProperty("prop" + j, generateRandomString(40));
