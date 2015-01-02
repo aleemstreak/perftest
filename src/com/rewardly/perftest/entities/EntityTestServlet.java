@@ -23,21 +23,22 @@ public class EntityTestServlet extends HttpServlet {
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)	throws IOException {
 		resp.setContentType("text/plain");
-		runBenchmark(new DatastoreFetcher(), resp);
-		runBenchmark(new ObjectifyFetcher(), resp);
-		runBenchmark(new MemcacheFetcher(), resp);
-	}
-	
-	private void runBenchmark(EntityBenchmark benchmark, HttpServletResponse resp) throws IOException {
-		List<Entity> testData = generateTestData(benchmark);
+		
+		List<Entity> testData = generateTestData();
 		List<Key> keys = getKeysFromEntities(testData);
 		
+		runBenchmark(new DatastoreFetcher(), resp, testData, keys);
+		runBenchmark(new ObjectifyFetcher(), resp, testData, keys);
+		runBenchmark(new MemcacheFetcher(), resp, testData, keys);
+	}
+	
+	private void runBenchmark(EntityBenchmark benchmark, HttpServletResponse resp, List<Entity> testData, List<Key> keys) throws IOException {
 		benchmark.storeTestData(testData);
 		benchmark.warmup();
 		benchmark.setup(keys);
 		
 		long runTime = System.nanoTime();
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 10; i++) {
 			benchmark.runOnce(keys);
 		}
 		runTime = (System.nanoTime() - runTime);
@@ -59,12 +60,12 @@ public class EntityTestServlet extends HttpServlet {
 		return keys;
 	}
 
-	private List<Entity> generateTestData(EntityBenchmark benchmark) {
+	private List<Entity> generateTestData() {
 		List<Entity> entities = new ArrayList<>();
 		for (int i = 1; i <= 1000; i++) {
-			Key k = KeyFactory.createKey(benchmark.getBenchmarkName(), i);
+			Key k = KeyFactory.createKey(generateRandomString(40), i);
 			Entity e = new Entity(k);
-			for (int j = 0; j < 20; j++) {
+			for (int j = 0; j < 100; j++) {
 				e.setProperty("prop" + j, generateRandomString(40));
 			}
 			entities.add(e);
@@ -72,7 +73,7 @@ public class EntityTestServlet extends HttpServlet {
 		return entities;
 	}
 
-	private Object generateRandomString(int len) {
+	private String generateRandomString(int len) {
 		StringBuilder sb = new StringBuilder(len);
 		for (int i = 0; i < len; i++) {
 			sb.append(AB.charAt(random.nextInt(AB.length())));
